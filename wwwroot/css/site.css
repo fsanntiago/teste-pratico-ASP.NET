@@ -1,0 +1,142 @@
+/*========================= GLOBAL ================================= */
+:root {
+
+    font-size: 62.5%; /* 1rem = 10px */
+}
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 60px;
+    font-size: 1.6rem;
+}
+
+/*@media (min-width: 768px) {*/
+/*    html {*/
+/*        !*font-size: 0.8rem;*!*/
+/*    }*/
+/*}*/
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+h2 {
+    font-size: 3.2rem;
+}
+
+label {
+    font-size: 1.7rem;
+}
+
+.btn {
+    font-size: 1.8rem;
+}
+
+th {
+    text-align: center;
+}
+
+td {
+    text-align: center;
+}
+
+
+/*========================= SweetAlert2 ================================= */
+.swal2-popup {
+    font-size: 1.28rem !important;
+}
+
+
+/*========================= Supplier ================================= */
+.header {
+    margin-top: 1.8rem;
+}
+
+.header div a {
+    font-size: 1.65rem;
+}
+
+.table-responsive {
+    height: 40rem;
+}
+
+table {
+    font-size: 1.8rem;
+    border-collapse: collapse;
+}
+
+table .btn-action {
+    /*color: #000000;*/
+    color: #ffffff;
+    font-size: 1.6rem;
+}
+
+/*table .btn-action i:hover {*/
+/*    color: #ffffff;*/
+/*}*/
+
+table .btn-action i {
+    padding: 0.9rem;
+    border-radius: 50px;
+
+}
+
+table .btn-edit {
+    margin-right: 1rem;
+}
+
+table .btn-edit i {
+    background-color: #3b6dee;
+}
+
+table .btn-edit i:hover {
+    background-color: #153fc2;
+}
+
+table .btn-delete i {
+    background-color: #ff0000;
+}
+
+table .btn-delete i:hover {
+    background-color: #b71212;
+}
+
+/*========================= Supplier - CREATE ================================= */
+
+.icon-required-field {
+    color: #f72f2f;
+    font-size: 0.8rem;
+}
+
+.field-validation-error {
+    color: red;
+    font-size: smaller;
+}
+
+.form-control-lg {
+    font-size: 1.5rem;
+}
+
+.form-select-lg {
+    font-size: 1.5rem;
+}
+
+.message-required-field {
+    font-size: 1.2rem;
+}
+
+
+
+

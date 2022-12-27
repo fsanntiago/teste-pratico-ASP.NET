@@ -1,0 +1,117 @@
+@model List<Supplier>
+
+@{
+  ViewData["Title"] = "Fornecedores";
+  var successMessage = TempData["successMessage"];
+}
+
+
+@* Header *@
+<div class="align-items-center header justify-content-between mb-3 row">
+  <div class="col-2">
+    <h2>Fornecedores</h2>
+  </div>
+  <div class="col-2">
+    <a asp-action="Create" asp-controller="Supplier" class="btn btn-primary" role="button">Cadastrar Fornecedor</a>
+  </div>
+</div>
+
+@* Table *@
+<div class="table-responsive">
+  <table class="table table-hover table-striped table-supplier">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nome</th>
+      <th>CNPJ</th>
+      <th>Especialidade</th>
+      <th>Acoes</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var supplier in Model)
+    {
+      <tr>
+        <td>@supplier.Id</td>
+        <td>@supplier.Name</td>
+        <td class="cnpj">@supplier.CNPJ</td>
+        <td>@supplier.Specialty</td>
+        <td class="icons">
+          <a asp-action="Edit" asp-controller="Supplier" asp-route-id="@supplier.Id" class="btn-action btn-edit" title="Editar">
+            <i class="fa-pen fa-solid"></i>
+          </a>
+          <a class="btn-action btn-delete" onclick="confirmDelete(@supplier.Id)" title="Remover">
+            <i class="fa-solid fa-trash"></i>
+          </a>
+        </td>
+      </tr>
+    }
+    </tbody>
+  </table>
+</div>
+
+@section Scripts
+{
+  <script type="text/javascript">
+  
+  // Display success message
+      @if (@successMessage != null)
+      {
+        @Html.Raw(@successMessage.ToString())
+      }  
+  
+  // Modal to confirm supplier removal
+    function confirmDelete(id){
+     Swal.fire({
+          title: "Excluir Fornecedor",
+          text: "Excluindo esse fornecedor perderá todas as informações. Esse processo não pode ser desfeito.",
+          icon: 'warning',
+          iconColor:"#ff0000",
+          showCancelButton: true,
+          confirmButtonColor: "#ff0000",
+          cancelButtonColor: "#a9c0d4",
+          confirmButtonText: "Excluir",
+          cancelButtonText: "Cancelar",
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            const suppplierId =  id;
+            $.ajax({
+              type: "POST",
+              url: '/Supplier/Delete/ '+ suppplierId,
+              data: {
+                Id: id
+              },
+              dataType: "html",
+              success: function(data, statusText, xhr) {
+                console.log("Supplier Deleted.");
+                if (xhr.status === 200) {
+                  Swal.fire({
+                    title: "Fornecedor Excluido Com Sucesso!",
+                    text: "Fornecedor excluido com sucesso",
+                    icon: "success",
+                    confirmButtonColor: "#1b6ec2",
+                    confirmButtonText: "Ok",
+                  }).then((result) => {
+                      location.reload();
+                  })
+                }
+              },
+              error: function(response) {
+                console.log("Error");
+                Swal.fire({
+                  title: "Error!",
+                  text: "Não foi possivel excluir o fornecedor",
+                  icon: "error",
+                  confirmButtonColor: "blue",
+                  confirmButtonText: "Ok",
+                });
+              }
+            });
+          } else if (
+            result.dismiss === swal.DismissReason.cancel
+          ) {}
+        })
+    }
+  </script>
+}

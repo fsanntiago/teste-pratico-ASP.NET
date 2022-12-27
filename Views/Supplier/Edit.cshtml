@@ -1,0 +1,69 @@
+@model TesteEstagio.ViewModels.Supplier.EditorSupplierViewModel
+
+@{
+  ViewData["Title"] = "Editar Fornecedor";
+  var errorMessage = TempData["errorMessage"]?.ToString();
+}
+
+<h2>@ViewData["Title"]</h2>
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+  <div class="alert alert-danger" role="alert">
+    <strong>Error</strong> @errorMessage
+  </div>
+}
+
+@* Form *@
+<form asp-action="Edit" asp-controller="Supplier" autocomplete="off" class="needs-validation" method="post" novalidate>
+  <div class="form-group mt-4">
+    <label asp-for="Name" class="form-label">
+      Nome
+      <span class="icon-required-field">
+        <i class="fa-asterisk fa-solid"></i>
+      </span>
+    </label>
+    <input asp-for="Name" class="form-control form-control-lg" placeholder="Nome do Fornecedor" type="text">
+    <span asp-validation-for="Name"></span>
+  </div>
+  <div class="mt-4 row">
+    <div class="col-md-3 form-group mb-3 oi">
+      <label asp-for="CNPJ" class="form-label">
+        CNPJ
+        <span class="icon-required-field">
+          <i class="fa-asterisk fa-solid"></i>
+        </span>
+      </label>
+      <input asp-for="CNPJ" class="form-control form-control-lg" id="cnpj" placeholder="00.000.000/0000-00" type="text">
+      <span asp-validation-for="CNPJ"></span>
+    </div>
+    <div class="col-md-4 form-group mb-3">
+      <label asp-for="Specialty" class="form-label">
+        Especialidade
+        <span class="icon-required-field">
+          <i class="fa-asterisk fa-solid"></i>
+        </span>
+      </label>
+      <select asp-for="Specialty" asp-items="Html.GetEnumSelectList<Specialties>()" class="form-select form-select-lg">
+        <option disabled hidden selected="selected" value="">Escolha uma especialidade...</option>
+      </select>
+      <span asp-validation-for="Specialty"></span>
+    </div>
+  </div>
+  <hr class="mb-4">
+  <div class="mb-3 message-required-field">
+    <span class="icon-required-field">
+      <i class="fa-asterisk fa-solid"></i>
+    </span>
+    Campo obrigatorio
+  </div>
+  <div class="d-grid">
+    <button class="btn btn-primary" type="submit">Atualizar</button>
+  </div>
+</form>
+
+@section Scripts
+{
+  @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+  }
+}
